@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package merchant;
+
+option go_package = "services/merchant-service/proto;merchant";
+
+import "google/protobuf/timestamp.proto";
+
+service MerchantService {
+  rpc RegisterMerchant(RegisterMerchantRequest) returns (RegisterMerchantResponse);
+  rpc GetMerchant(GetMerchantRequest) returns (GetMerchantResponse);
+}
+
+message RegisterMerchantRequest {
+  string name = 1;
+  string email = 2;
+}
+
+message RegisterMerchantResponse {
+  string merchant_id = 1;
+}
+
+message GetMerchantRequest {
+  string merchant_id = 1;
+}
+
+message GetMerchantResponse {
+  string merchant_id = 1;
+  string name = 2;
+  string email = 3;
+  bool kyc_verified = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
